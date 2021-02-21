@@ -1,0 +1,47 @@
+.popup__button_type_close {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    border: none;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    cursor: pointer;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+}
+
+
+@media screen and (max-width: 767px) {
+  .popup__button_type_close {
+    width: 26px;
+    height: 26px;
+    right: -10px;
+    top: -30px;
+
+  }
+}
+
+.popup__button-img {
+  width: 40px;
+  height: 40px;
+}
+
+@media screen and (max-width: 767px) {
+  .popup__button-img {
+    width: 26px;
+    height: 26px;
+    right: -10px;
+    top: -30px;
+  }
+}
+
+.popup__button-img:hover {
+    opacity: 0.6;
+    transform: rotate(45deg);
+}

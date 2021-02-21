@@ -1,0 +1,18 @@
+.info__button {
+    max-width: 24px;
+    max-height: 24px;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    align-self: center;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .info__button {
+      max-width: 18px;
+      max-height: 18px;
+    }
+  }
+  
+  .info__button:hover {
+      opacity: 0.6;
+  }

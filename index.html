@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./pages/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mesto</title>
+</head>
+
+<body class="page">
+    <header class="header header__border">
+        <img class="logo" src="./images/logo.svg" alt="Логотип Место">
+    </header>
+
+    <main>
+        <section class="profile">
+            <img class="profile__avatar" src="./images/profile__avatar.jpg" alt="Аватар">
+            <div class="info">
+                <h1 class="info__name">Жак-Ив Кусто</h1>
+                <button type="button" class="button info__button"><img class="info__button info__button_open" src="./images/button_edit.png" alt="Кнопка редактирования"></button>
+                <p class="info__about">Исследователь океана</p>
+            </div>
+            <button type="button" class="profile__button profile__button_img"></button>
+            
+            <div class="popup" id="popup">
+                <div class="popup__container">
+                   <button type="button" class="popup__button popup__button_type_close"><img class="popup__button-img" src="images/close_icon.png" alt="Закрыть"></button>
+                   <h3 class="popup__title">Редактировать профиль</h3>
+                   <form class="popup__form">
+                    <fieldset class="popup__item">
+                      <input type="text" value="Жак-Ив Кусто" class="popup__input popup__input_type_name" placeholder="Жак-Ив Кусто" minlength="1" maxlength="30" required>
+                    </fieldset>
+                    <fieldset class="popup__item">
+                      <input type="text" value="Исследователь океана" class="popup__input popup__input_type_about" placeholder="Исследователь океана" minlength="1" maxlength="30" required>
+                    </fieldset>
+                    <button type="submit" class="popup__button popup__button_type_save">Сохранить</button>
+                  </form>
+                </div>
+             </div>
+        </section>
+
+        <section>
+            <ul class="elements">
+                <li class="element">
+                    <img class="element__picture" src="./images/kuta.jpg" alt="Карачаевск">
+                    <p class="element__name">Кута</p>
+                    <button type="button" class="button element__button-like"></button>
+                </li>
+                <li class="element">
+                    <img class="element__picture" src="./images/mombassa.jpg" alt="Гора Эльбрус">
+                    <p class="element__name">Момбаса</p>
+                    <button type="button" class="button element__button-like"></button>
+                </li>
+                <li class="element">
+                    <img class="element__picture" src="./images/manila.jpg" alt="Домбай">
+                    <p class="element__name">Манила</p>
+                    <button type="button" class="button element__button-like"></button>
+                </li>
+                <li class="element">
+                    <img class="element__picture" src="./images/phuket.jpg" alt="Гора Эльбрус">
+                    <p class="element__name">Май Кхао</p>
+                    <button type="button" class="button element__button-like"></button>
+                </li>
+                <li class="element">
+                    <img class="element__picture" src="./images/maldives.jpg" alt="Домбай">
+                    <p class="element__name">Мале</p>
+                    <button type="button" class="button element__button-like"></button>
+                </li>
+                <li class="element">
+                    <img class="element__picture" src="./images/seysheles.jpg" alt="Карачаево Ч">
+                    <p class="element__name">Мар Англез</p>
+                    <button type="button" class="button element__button-like"></button>
+                </li>
+            </ul>
+       </section>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
+    </footer>
+
+    <script src="script.js"></script>  
+
+    
+</body>
+</html>
