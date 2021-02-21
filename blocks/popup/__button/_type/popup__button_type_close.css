@@ -8,10 +8,8 @@
     position: absolute;
     right: -40px;
     top: -40px;
-    cursor: pointer;
     background-color: transparent;
     cursor: pointer;
-    padding: 0;
     font: inherit;
     color: inherit;
 }
