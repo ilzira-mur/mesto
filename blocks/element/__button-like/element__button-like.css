@@ -1,10 +1,7 @@
 .element__button-like {
-    position: absolute;
-    right: 30px;
-    bottom: 30px;
     width: 22px;
     height: 19px;
-    background-image: url(../../../images/like.png);
+    background-image: url(../../../images/like_button.svg);
   }
   
   .element__button-like:hover {
