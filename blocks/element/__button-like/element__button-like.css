@@ -1,5 +1,5 @@
 .element__button-like {
-    background-image: url(/images/like.png);
+    background-image: url(../../../images/like.png);
     position: absolute;
     right: 30px;
     bottom: 30px;
