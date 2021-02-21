@@ -8,7 +8,9 @@
     background-color: transparent;
     cursor: pointer;
     border: none;
-    margin-left: 244px;
+    background-image: url(../../../images/add_button.png);
+    background-repeat: no-repeat;
+    margin-left: auto;
   }
   
   .profile__button:hover {
@@ -20,6 +22,8 @@
       margin: 0 auto;
       width: 282px;
       min-height: 50px;
-  
+      max-height: 50px;
+      max-width: 282px;
+      background-image: url(../../../images/add_button_767.png);
     }
   }
