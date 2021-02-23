@@ -10,7 +10,7 @@
 
 <body class="page">
     <header class="header">
-        <img class="logo" src="./images/logo.svg" alt="Логотип Место">
+        <a class="link header__logo" href="#" target="_self"></a>
     </header>
 
     <main>
@@ -18,70 +18,54 @@
             <img class="profile__avatar" src="./images/profile__avatar.jpg" alt="Аватар">
             <div class="info">
                 <h1 class="info__name">Жак-Ив Кусто</h1>
-                <button type="button" class="button info__button"><img class="info__button info__button_open" src="./images/edit_button.svg" alt="Кнопка редактирования"></button>
+                <button type="button" class="button button_type_edit"><img class="info__button-img" src="./images/edit_button.svg" alt="Кнопка редактирования"></button>
                 <p class="info__about">Исследователь океана</p>
             </div>
-            <button type="button" class="profile__button profile__button_img"></button>
-            
-            <div class="popup" id="popup">
-                <div class="popup__container">
-                   <button type="button" class="popup__button popup__button_type_close"><img class="popup__button-img" src="./images/close_icon.svg" alt="Закрыть"></button>
-                   <h3 class="popup__title">Редактировать профиль</h3>
-                   <form class="popup__form" name="popupform">
-                    <fieldset class="popup__item">
-                      <input type="text" name="profilename" value="Жак-Ив Кусто" class="popup__input popup__input_type_name" placeholder="Жак-Ив Кусто" minlength="1" maxlength="30" required>
-                    </fieldset>
-                    <fieldset class="popup__item">
-                      <input type="text" name="profileabout" value="Исследователь океана" class="popup__input popup__input_type_about" placeholder="Исследователь океана" minlength="1" maxlength="30" required>
-                    </fieldset>
-                    <button type="submit" class="popup__button popup__button_type_save">Сохранить</button>
-                  </form>
-                </div>
-             </div>
+            <button type="button" class="button button_type_add-card"><img class="profile__button-img" src="./images/add_button_plus.svg" alt="Кнопка добавления новой карточки"></button>
         </section>
 
         <section>
-            <ul class="elements">
-                <li class="element">
-                    <img class="element__picture" src="./images/kuta.jpg" alt="Кута">
-                    <div class="element__info">
-                    <p class="element__name">Кута</p>
-                    <button type="button" class="button element__button-like"></button>
+            <ul class="cards">
+                <li class="card">
+                    <img class="card__picture" src="./images/kuta.jpg" alt="Кута">
+                    <div class="card__info">
+                      <h2 class="card__name">Кута</h2>
+                      <button type="button" class="button card__button-like" aria-label="like"></button>
                     </div>
                 </li>
-                <li class="element">
-                    <img class="element__picture" src="./images/mombassa.jpg" alt="Момбаса">
-                    <div class="element__info">
-                    <p class="element__name">Момбаса</p>
-                    <button type="button" class="button element__button-like"></button>
+                <li class="card">
+                    <img class="card__picture" src="./images/mombassa.jpg" alt="Момбаса">
+                    <div class="card__info">
+                      <h2 class="card__name">Момбаса</h2>
+                      <button type="button" class="button card__button-like" aria-label="like"></button>
                     </div>
                 </li>
-                <li class="element">
-                    <img class="element__picture" src="./images/manila.jpg" alt="Манила">
-                    <div class="element__info">
-                    <p class="element__name">Манила</p>
-                    <button type="button" class="button element__button-like"></button>
+                <li class="card">
+                    <img class="card__picture" src="./images/manila.jpg" alt="Манила">
+                    <div class="card__info">
+                      <h2 class="card__name">Манила</h2>
+                      <button type="button" class="button card__button-like" aria-label="like"></button>
                     </div>
                 </li>
-                <li class="element">
-                    <img class="element__picture" src="./images/phuket.jpg" alt="Пхукет">
-                    <div class="element__info">
-                    <p class="element__name">Пхукет</p>
-                    <button type="button" class="button element__button-like"></button>
+                <li class="card">
+                    <img class="card__picture" src="./images/phuket.jpg" alt="Пхукет">
+                    <div class="card__info">
+                      <h2 class="card__name">Пхукет</h2>
+                      <button type="button" class="button card__button-like" aria-label="like"></button>
                     </div>
                 </li>
-                <li class="element">
-                    <img class="element__picture" src="./images/maldives.jpg" alt="Мале">
-                    <div class="element__info">
-                    <p class="element__name">Мале</p>
-                    <button type="button" class="button element__button-like"></button>
+                <li class="card">
+                    <img class="card__picture" src="./images/maldives.jpg" alt="Мале">
+                    <div class="card__info">
+                      <h2 class="card__name">Мале</h2>
+                      <button type="button" class="button card__button-like" aria-label="like"></button>
                     </div>
                 </li>
-                <li class="element">
-                    <img class="element__picture" src="./images/seysheles.jpg" alt="Мар Англез">
-                    <div class="element__info">
-                    <p class="element__name">Мар Англез</p>
-                    <button type="button" class="button element__button-like"></button>
+                <li class="card">
+                    <img class="card__picture" src="./images/seysheles.jpg" alt="Мар Англез">
+                    <div class="card__info">
+                      <h2 class="card__name">Мар Англез</h2>
+                      <button type="button" class="button card__button-like" aria-label="like"></button>
                     </div>
                 </li>
             </ul>
@@ -92,8 +76,19 @@
         <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
     </footer>
 
-    <script src="script.js"></script>  
+    <article class="popup" id="popup">
+        <div class="popup__container">
+           <button type="button" class="popup__button popup__button_type_close" aria-label="close"></button>
+           <h3 class="popup__title">Редактировать профиль</h3>
+           <form class="popup__form" name="popupform">
+              <input type="text" name="profilename" class="popup__input popup__input_type_name" placeholder="Имя" minlength="1" maxlength="30" required>
+              <input type="text" name="profileabout" class="popup__input popup__input_type_about" placeholder="Профессия" minlength="1" maxlength="30" required>
+            <button type="submit" class="popup__button popup__button_type_save">Сохранить</button>
+           </form>
+        </div>
+    </article>
 
-    
+    <script src="./scripts/index.js"></script>
+
 </body>
 </html>
