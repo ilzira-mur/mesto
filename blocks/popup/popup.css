@@ -13,3 +13,11 @@
     align-items: center;
     justify-content: center;
    }
+
+
+   .popup__photo {
+       background-color: white;
+       width: 300px;
+       height: 200px;
+       position: relative;
+   }
