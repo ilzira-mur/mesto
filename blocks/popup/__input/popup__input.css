@@ -13,6 +13,8 @@
     padding-top: 0;
     margin-bottom: 0;
     margin-left: 36px;
+    margin-right: 36px;
+    padding: 0;
   }
   
   .popup__input:last-of-type {
@@ -23,5 +25,7 @@
     .popup__input {
       max-width: 238px;
       margin-left: 22px;
+      margin-right: 22px;
+      padding: 0;
     }
   }

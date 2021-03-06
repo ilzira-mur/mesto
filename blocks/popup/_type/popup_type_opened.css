@@ -1,4 +1,4 @@
-.popup_opened {
+.popup_type_opened {
     display: flex;
     animation: fade-in 1s;
   }
@@ -11,4 +11,3 @@
       opacity: 1;
     }
   }
-  
