@@ -47,13 +47,13 @@
         </div>
     </article>
 
-    <article class="popup popup_type_add-card" id="popup">
+    <article class="popup popup_type_add-card">
         <div class="popup__container">
            <button type="button" class="popup__button popup__button_type_close" aria-label="close"></button>
            <h3 class="popup__title">Новое место</h3>
            <form class="popup__form popup__form_type_new-card">
               <input type="text" name="cardname" class="popup__input popup__input_type_card-name" placeholder="Название" required>
-              <input type="link" name="cardlink" class="popup__input popup__input_type_card-link" placeholder="Ссылка на картинку" required>
+              <input type="url" name="cardlink" class="popup__input popup__input_type_card-link" placeholder="Ссылка на картинку" required>
             <button type="submit" class="popup__button popup__button_type_save popup__button_type_saveNew">Создать</button>
            </form>
         </div>
@@ -62,8 +62,8 @@
     <article class="popup popup_type_zoomed" id="popup_type_zoomed">
         <div class="popup__zoomed">
             <button type="button" class="popup__button popup__button_type_close" aria-label="close"></button>
-            <img class="popup__zoomed-picture">
-            <h2 class="popup__zoomed-name"></h2>
+            <img class="popup__zoomed-picture" alt=''>
+            <p class="popup__zoomed-name"></p>
         </div>
     </article>
 
