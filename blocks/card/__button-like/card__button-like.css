@@ -8,6 +8,7 @@
     color: inherit;
     background-color: transparent;
     cursor: pointer;
+    background-repeat: no-repeat;
   }
   
   .card__button-like:hover {
