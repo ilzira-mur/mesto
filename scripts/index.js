@@ -1,8 +1,5 @@
 const popup = document.querySelector('.popup');
-
-const buttonEditFormClose = document.getElementById('buttonCloseEdit');
-const buttonCardFormClose = document.getElementById('buttonAddCardClose');
-const buttonZoomedPictureClose = document.getElementById('buttonZooomedPictureClose');
+const buttonsClosePopup = document.querySelectorAll('.popup__button_type_close');
 
 const buttonEdit = document.querySelector('.button_type_edit');
 const editFormModalWindow = document.querySelector('.popup_type_edit');
@@ -46,8 +43,8 @@ function closePopupZoomedPicture() {
 }
 
 function openPopupEdit() {
-  openPopup(editFormModalWindow);
   savePopupEdit();
+  openPopup(editFormModalWindow);
 };
 
 function savePopupEdit() {
@@ -59,10 +56,11 @@ function openPopupAddCard() {
   openPopup(cardFormModalWindow);
 };
 
-function openPopupZoomedPicture(event) {
+function handleZoomedPicture(event) {
   openPopup(zoomedPictureModalWindow);
-  popupZoomedPicture.src = event.target.getAttribute('src');
-  popupZoomedName.textContent = event.target.getAttribute('alt');
+  popupZoomedPicture.src = event.target.src;
+  popupZoomedPicture.alt = event.target.alt;
+  popupZoomedName.textContent = event.target.alt;
 };
 
 function submitEditProfile(event) {
@@ -80,11 +78,11 @@ function submitNewCard(event) {
   closePopup(cardFormModalWindow);
 };
 
-function likeCard(event) {
+function handleLikeCard(event) {
   event.target.classList.toggle('card__button-like_active');
 };
 
-function removeCard(event) {
+function handleDeleteCard(event) {
   event.target.closest('.card').remove();
 };
 
@@ -97,9 +95,9 @@ function createCard(name,  link) {
   cardName.textContent = name;
   cardPicture.alt = name;
   cardPicture.src = link;
-  buttonDelete.addEventListener('click', removeCard);
-  buttonLike.addEventListener('click', likeCard);
-  cardPicture.addEventListener('click', openPopupZoomedPicture);
+  buttonDelete.addEventListener('click', handleDeleteCard);
+  buttonLike.addEventListener('click', handleLikeCard);
+  cardPicture.addEventListener('click', handleZoomedPicture);
   return newItem;
 };
 
@@ -114,9 +112,9 @@ initialCards.forEach((card) => {
 buttonEdit.addEventListener('click', openPopupEdit);
 buttonAddCard.addEventListener('click', openPopupAddCard);
 
-buttonEditFormClose.addEventListener('click', closePopupEdit);
-buttonCardFormClose.addEventListener('click', closePopupAddCard);
-buttonZoomedPictureClose.addEventListener('click', closePopupZoomedPicture);
+buttonsClosePopup.forEach(popup => popup.addEventListener("click", () => closePopupEdit()));
+buttonsClosePopup.forEach(popup => popup.addEventListener("click", () => closePopupAddCard()));
+buttonsClosePopup.forEach(popup => popup.addEventListener("click", () => closePopupZoomedPicture()));
 
 formElementEdit.addEventListener('submit', submitEditProfile);
 formElementCard.addEventListener('submit', submitNewCard);
