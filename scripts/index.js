@@ -1,4 +1,3 @@
-const popup = document.querySelector('.popup');
 const buttonsClosePopup = document.querySelectorAll('.popup__button_type_close');
 
 const buttonEdit = document.querySelector('.button_type_edit');
@@ -30,18 +29,6 @@ function closePopup(popup) {
   popup.classList.remove('popup_type_opened');
 };
 
-function closePopupEdit() {
-  closePopup(editFormModalWindow)
-};
-
-function closePopupAddCard() {
-  closePopup(cardFormModalWindow);
-};
-
-function closePopupZoomedPicture() {
-  closePopup(zoomedPictureModalWindow);
-}
-
 function openPopupEdit() {
   savePopupEdit();
   openPopup(editFormModalWindow);
@@ -57,10 +44,10 @@ function openPopupAddCard() {
 };
 
 function handleZoomedPicture(event) {
-  openPopup(zoomedPictureModalWindow);
   popupZoomedPicture.src = event.target.src;
   popupZoomedPicture.alt = event.target.alt;
   popupZoomedName.textContent = event.target.alt;
+  openPopup(zoomedPictureModalWindow);
 };
 
 function submitEditProfile(event) {
@@ -72,8 +59,10 @@ function submitEditProfile(event) {
 
 function submitNewCard(event) {
   event.preventDefault();
-  const cardElement = createCard(addCardNameInput.value, addCardLinkInput.value);
-  cardsList.prepend(cardElement);
+  renderCard({
+    name: addCardNameInput.value,
+    link: addCardLinkInput.value
+  },cardsList);
   formElementCard.reset();
   closePopup(cardFormModalWindow);
 };
@@ -103,7 +92,7 @@ function createCard(name,  link) {
 
 function renderCard(card, cardsList) {
   cardsList.prepend(createCard(card.name, card.link));
- }
+ };
 
 initialCards.forEach((card) => {
   renderCard(card, cardsList)
@@ -112,9 +101,11 @@ initialCards.forEach((card) => {
 buttonEdit.addEventListener('click', openPopupEdit);
 buttonAddCard.addEventListener('click', openPopupAddCard);
 
-buttonsClosePopup.forEach(popup => popup.addEventListener("click", () => closePopupEdit()));
-buttonsClosePopup.forEach(popup => popup.addEventListener("click", () => closePopupAddCard()));
-buttonsClosePopup.forEach(popup => popup.addEventListener("click", () => closePopupZoomedPicture()));
+buttonsClosePopup.forEach(popup => {
+  popup.addEventListener('click', (evt) => {
+    closePopup(evt.target.closest('.popup'));
+  });
+});
 
 formElementEdit.addEventListener('submit', submitEditProfile);
 formElementCard.addEventListener('submit', submitNewCard);
