@@ -31,3 +31,7 @@
     opacity: 0.8;
     transition: 0.1s linear;
 }
+
+.popup__button_disabled {
+  background: #E5E5E5;
+}
