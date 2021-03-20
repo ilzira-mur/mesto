@@ -41,9 +41,9 @@
            <h3 class="popup__title">Редактировать профиль</h3>
            <form class="popup__form popup__form_type_edit" name="edit" novalidate>
               <input type="text" id ="profilename" name="profilename" class="popup__input popup__input_type_name" placeholder="Имя" minlength="2" maxlength="40" required>
-              <span class="span__error" id="profilename-error"></span>
+              <span class="popup__span-error" id="profilename-error"></span>
               <input type="text" id="profileabout" name="profileabout" class="popup__input popup__input_type_about" placeholder="Профессия" minlength="2" maxlength="200" required>
-              <span class="span__error" id="profileabout-error"></span>
+              <span class="popup__span-error" id="profileabout-error"></span>
             <button type="submit" class="popup__button popup__button_type_save popup__button_type_save-edit">Сохранить</button>
            </form>
         </div>
@@ -55,9 +55,9 @@
            <h3 class="popup__title">Новое место</h3>
            <form class="popup__form popup__form_type_new-card" name="add" novalidate>
               <input type="text" id="cardname" name="cardname" class="popup__input popup__input_type_card-name" placeholder="Название" minlength="2" maxlength="30" required>
-              <span class="span__error" id="cardname-error"></span>
+              <span class="popup__span-error" id="cardname-error"></span>
               <input type="url" id="cardlink" name="cardlink" class="popup__input popup__input_type_card-link" placeholder="Ссылка на картинку" required>
-              <span class="span__error" id="cardlink-error"></span>
+              <span class="popup__span-error" id="cardlink-error"></span>
             <button type="submit" class="popup__button popup__button_type_save popup__button_type_save-card popup__button_disabled" disabled>Создать</button>
            </form>
         </div>

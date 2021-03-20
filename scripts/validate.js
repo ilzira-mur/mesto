@@ -2,7 +2,7 @@ const obj = {
     formSelectop: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__button_type_save',
-    errorSpanClass: 'span__error_active',
+    errorSpanClass: 'popup__span-error_active',
     errorInputClass: 'popup__input_type_error',
     inactiveButtonClass: 'popup__button_disabled',
   }
