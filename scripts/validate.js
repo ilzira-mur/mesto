@@ -12,39 +12,40 @@ const obj = {
     const formList = Array.from(document.querySelectorAll(formSelectop));
     
     formList.forEach(
-      formElement => {formElement.addEventListener('submit', (event) => {
+      formElement => {
+        formElement.addEventListener('submit', (event) => {
           event.preventDefault();
         });
-        setInputListeners(formElement, {inputSelector, submitButtonSelector, errorSpanClass, errorInputClass, inactiveButtonClass});
+        setInputListeners(formElement, inputSelector, submitButtonSelector, errorSpanClass, errorInputClass, inactiveButtonClass);
       }
     );
   };
   
   // обработчик полей формы
-  const setInputListeners = (formElement, {inputSelector, submitButtonSelector, errorSpanClass, errorInputClass, inactiveButtonClass}) => {
+  const setInputListeners = (formElement, inputSelector, submitButtonSelector, errorSpanClass, errorInputClass, inactiveButtonClass) => {
     const inputList = Array.from(formElement.querySelectorAll(inputSelector));
     const buttonElement = formElement.querySelector(submitButtonSelector);
     
     inputList.forEach(
       inputElement => {inputElement.addEventListener('input', () => {
-          checkInput(formElement, inputElement, {errorSpanClass, errorInputClass});
-          toggleButtonState(inputList, buttonElement, {inactiveButtonClass});
+          checkInput(formElement, inputElement, errorSpanClass, errorInputClass);
+          toggleButtonState(inputList, buttonElement, inactiveButtonClass);
         });
       }
     );
   };
   
   // проверка валидности введеных данных
-  const checkInput = (formElement, inputElement, {errorSpanClass, errorInputClass}) => {
+  const checkInput = (formElement, inputElement, errorSpanClass, errorInputClass) => {
     if (inputElement.validity.valid) {
-      hideInputError(formElement, inputElement, {errorSpanClass, errorInputClass});
+      hideInputError(formElement, inputElement, errorSpanClass, errorInputClass);
     } else {
-      showInputError(formElement, inputElement, {errorSpanClass, errorInputClass});
+      showInputError(formElement, inputElement, errorSpanClass, errorInputClass);
     }
   };
   
   // скрыть ошибку ввода и убрать подчеркивание поля ввода
-  const hideInputError = (formElement, inputElement, {errorSpanClass, errorInputClass}) => {
+  const hideInputError = (formElement, inputElement, errorSpanClass, errorInputClass) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     errorElement.textContent = '';
     errorElement.classList.remove(errorSpanClass);
@@ -52,7 +53,7 @@ const obj = {
   };
   
   // показать ошибку ввода и подчеркнуть поле ввода
-  const showInputError = (formElement, inputElement, {errorSpanClass, errorInputClass}) => {
+  const showInputError = (formElement, inputElement, errorSpanClass, errorInputClass) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     errorElement.textContent = inputElement.validationMessage;
     errorElement.classList.add(errorSpanClass);
@@ -60,8 +61,8 @@ const obj = {
   };
   
   // переключатель состояния кнопки
-  const toggleButtonState = (inputList, buttonElement, {inactiveButtonClass}) => {
-    if (hasInvalidInput(inputList) || hasEmptyInput(inputList)) {
+  const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
+    if (hasInvalidInput(inputList)) {
       buttonElement.classList.add(inactiveButtonClass);
       buttonElement.setAttribute('disabled', true);
     } else {
@@ -75,9 +76,5 @@ const obj = {
     return inputList.some(inputElement => !inputElement.validity.valid);
   };
   
-  // проверка есть ли пустое поле
-  const hasEmptyInput = (inputList) => {
-    return !inputList.some(inputElement => inputElement.value.length > 0);
-  };
   
   enableValidation(obj);
