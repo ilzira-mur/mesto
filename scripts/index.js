@@ -14,25 +14,30 @@ const cardFormModalWindow = document.querySelector('.popup_type_add-card');
 const formElementCard = document.querySelector('.popup__form_type_new-card');
 const addCardNameInput = document.querySelector('.popup__input_type_card-name');
 const addCardLinkInput = document.querySelector('.popup__input_type_card-link');
+const zoomedPictureModalWindow = document.querySelector('.popup_type_zoomed');
+const popupZoomedPicture = document.querySelector('.popup__picture');
+const popupZoomedName = document.querySelector('.popup__caption');
 const cardsList = document.querySelector('.cards');
-const buttonCreateNewCard = document.querySelector('.popup__button_type_save-card');
+
 
 // экземпляр класса FormValidator для каждой формы
-const formValidatorTypeEdit = new FormValidator(obj, '.popup__form_type_edit');
-const enableValidationTypeEdit = formValidatorTypeEdit.enableValidation();
+const formValidatorTypeEdit = new FormValidator(obj, formElementEdit);
+formValidatorTypeEdit.enableValidation();
 
-const formValidatorTypeNewCard = new FormValidator(obj, '.popup__form_type_new-card');
-const enableValidationTypeNewCard = formValidatorTypeNewCard.enableValidation();
+const formValidatorTypeNewCard = new FormValidator(obj, formElementCard);
+formValidatorTypeNewCard.enableValidation();
 
 
 // открытие модального окна
 function openPopup(popup) {
   popup.classList.add('popup_type_opened');
+  document.addEventListener('keydown', keyHandler);
 };
 
 // закрытие модального окна
 function closePopup(popup) {
   popup.classList.remove('popup_type_opened');
+  document.removeEventListener('keydown', keyHandler);
 };
 
 // открытие модального окна радактирования профиля
@@ -45,6 +50,14 @@ function openPopupEdit() {
 function savePopupEdit() {
   nameInput.value = nameInfo.textContent;
   jobInput.value = jobInfo.textContent;
+};
+
+// открытие модального окна увеличенной картинки
+export function handleZoomedPicture(name, link) {
+  popupZoomedPicture.src = link;
+  popupZoomedPicture.alt = name;
+  popupZoomedName.textContent = name;
+  openPopup(zoomedPictureModalWindow);
 };
 
 
@@ -65,27 +78,29 @@ function submitNewCard(event) {
     link: addCardLinkInput.value
   },cardsList);
   formElementCard.reset();
-  buttonCreateNewCard.classList.add('popup__button_disabled');
-  buttonCreateNewCard.setAttribute('disabled', true);
+  formValidatorTypeNewCard.disableSubmitButton();
   closePopup(cardFormModalWindow);
 };
 
 
 // прогрузка карточек на страницу
 initialCards.forEach((item) => {
-const card = new Card(item, '.card-template_type_default');
-const cardElement = card.createNewCard();
-const cardsList = document.querySelector('.cards');
+const cardElement = createCard(item);
 cardsList.prepend(cardElement);
 });
 
 
 // рендер карточек
-function renderCard(item, cardsList) {
-  const card = new Card(item, '.card-template_type_default');
-  cardsList.prepend(card.createNewCard());
+function renderCard(item) {
+  cardsList.prepend(createCard(item));
  };
 
+
+// создание нового экземпляра карточки
+ function createCard(item) {
+  const card = new Card(item, '.card-template_type_default');
+  return card.createNewCard();
+};
 
 // закрытие попапа кликом на оверлей или нажатием на кнопку крестик
 popup.forEach(popup => {
@@ -107,7 +122,6 @@ function keyHandler(evt) {
 
 
 // слушатели
-document.addEventListener('keydown', keyHandler);
 buttonEdit.addEventListener('click', openPopupEdit);
 buttonAddCard.addEventListener('click', () => openPopup(cardFormModalWindow))
 formElementEdit.addEventListener('submit', submitEditProfile);

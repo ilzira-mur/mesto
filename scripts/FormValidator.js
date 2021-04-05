@@ -20,21 +20,16 @@ export class FormValidator {
   
 // валидация
   enableValidation() {
-    this._formList = Array.from(document.querySelectorAll(this._formSelectop));
-    this._formList.forEach(formElement => {formElement.addEventListener('submit', (event) => {
-          event.preventDefault();
-        });
-        this._setInputListeners();
-      }
-    );
-  }
+    this._formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault()
+      });
+    this._setInputListeners();
+  };
 
   // обработчик полей формы
   _setInputListeners() {
-    const formElement = document.querySelector(this._formElement);
-    this._inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
-    this._buttonElement = formElement.querySelector(this._submitButtonSelector);
-    
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     this._inputList.forEach((inputElement) => {inputElement.addEventListener('input', () => {
           this._checkInput(inputElement);
           this._toggleButtonState();
@@ -70,13 +65,18 @@ export class FormValidator {
   // переключатель состояния кнопки
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this._buttonElement.classList.add(this._inactiveButtonClass);
-      this._buttonElement.setAttribute('disabled', true);
+      this.disableSubmitButton()
     } else {
       this._buttonElement.classList.remove(this._inactiveButtonClass);
       this._buttonElement.removeAttribute('disabled');
     }
   };
+
+  // отключение кнопки сабмита
+  disableSubmitButton() {
+    this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._buttonElement.setAttribute('disabled', true);
+  }
 
   // проверка есть ли одно не валидное поле
   _hasInvalidInput() {
