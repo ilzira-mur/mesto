@@ -1,3 +1,4 @@
+// данные для валидации
 export const obj = {
   formSelectop: '.popup__form',
   inputSelector: '.popup__input',
@@ -6,7 +7,8 @@ export const obj = {
   errorInputClass: 'popup__input_type_error',
   inactiveButtonClass: 'popup__button_disabled',
 }
-  
+
+// класс настраивания валидации полей формы
 export class FormValidator {
   constructor(obj, formElement) {
     this._formElement = formElement;

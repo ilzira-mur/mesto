@@ -1,11 +1,11 @@
-import { handleZoomedPicture } from './index.js'
-
-export class Card {
-  constructor(data, cardSelector) {
+// класс для создания карточки
+export default class Card {
+  constructor(data, cardSelector, {handleCardClick}) {
     this._name = data.name;
     this._link = data.link;
     this._data = data;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   // получение шаблона разметки
@@ -37,19 +37,17 @@ export class Card {
       this._handleDeleteCard();
     });
     this._element.querySelector('.card__picture').addEventListener('click', () => {
-      handleZoomedPicture(this._data.name, this._data.link);
+      this._handleCardClick(this._data.name, this._data.link);
     });
   }
-
 
   // переключение состояния лайка
   _handleLikeCard() {
     this._element.querySelector('.card__button-like').classList.toggle('card__button-like_active');
-    console.log(this._link, this._name)
   }
 
   // удаление карточки
   _handleDeleteCard() {
   this._element.querySelector('.card__button-delete').closest('.card').remove();
-};
+}
 }
