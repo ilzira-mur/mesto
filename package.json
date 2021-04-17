@@ -1,19 +1,38 @@
 {
-  "name": "yandex_praktikum",
+  "name": "yandex.praktikum",
   "version": "0.0.1",
-  "description": "learning platform",
+  "description": "Learning platform",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf dist && webpack --mode production",
+    "dev": "webpack serve --mode development"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ilzira-mur/mesto.git"
   },
-  "author": "ilzira murtazina",
+  "author": "ilzira",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ilzira-mur/mesto/issues"
   },
-  "homepage": "https://github.com/ilzira-mur/mesto#readme"
+  "homepage": "https://github.com/ilzira-mur/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-env": "^7.13.15",
+    "autoprefixer": "^10.2.5",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.2",
+    "cssnano": "^5.0.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.1",
+    "mini-css-extract-plugin": "^1.4.1",
+    "postcss": "^8.2.10",
+    "postcss-loader": "^5.2.0",
+    "webpack": "^5.33.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  }
 }

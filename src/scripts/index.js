@@ -4,6 +4,7 @@ import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
+import '../pages/index.css';
 
 
 const initialCards = [
@@ -101,7 +102,7 @@ const editPopup = new PopupWithForm (editFormModalWindow, {
 editPopup.setEventListeners();
 
 
-// слушатели кнопки изменить профиль
+// слушатель кнопки изменить профиль
 buttonEdit.addEventListener('click', () => {
   const profileInfo = userInfo.getUserInfo();
   nameInput.value = profileInfo.name;
@@ -109,7 +110,7 @@ buttonEdit.addEventListener('click', () => {
   editPopup.open();
 })
 
-// слушатели кнопки добавить новую карточку
+// слушатель кнопки добавить новую карточку
 buttonAddCard.addEventListener('click', () => {
   formElementCard.reset();
   addNewCardPopup.open();
