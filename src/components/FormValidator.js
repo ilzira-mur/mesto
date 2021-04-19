@@ -1,15 +1,5 @@
-// данные для валидации
-export const obj = {
-  formSelectop: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button_type_save',
-  errorSpanClass: 'popup__span-error_active',
-  errorInputClass: 'popup__input_type_error',
-  inactiveButtonClass: 'popup__button_disabled',
-}
-
 // класс настраивания валидации полей формы
-export class FormValidator {
+export default class FormValidator {
   constructor(obj, formElement) {
     this._formElement = formElement;
     this._formSelectop = obj.formSelectop;
@@ -69,8 +59,7 @@ export class FormValidator {
     if (this._hasInvalidInput()) {
       this.disableSubmitButton()
     } else {
-      this._buttonElement.classList.remove(this._inactiveButtonClass);
-      this._buttonElement.removeAttribute('disabled');
+      this.ableSubmitButton()
     }
   };
 
@@ -80,9 +69,25 @@ export class FormValidator {
     this._buttonElement.setAttribute('disabled', true);
   }
 
+  // включение кнопки сабмита
+  ableSubmitButton() {
+    this._buttonElement.classList.remove(this._inactiveButtonClass);
+    this._buttonElement.removeAttribute('disabled');
+  }
+
   // проверка есть ли одно не валидное поле
   _hasInvalidInput() {
     return this._inputList.some(inputElement => !inputElement.validity.valid);
   };
+
+  // удаление сообщений об ошибках
+  removeInputErrors() {
+    const inputErrors = this._formElement.querySelectorAll(`.${this._errorInputClass}`);
+    if (inputErrors) {
+      inputErrors.forEach((error) => {
+        this._hideInputError(error);
+      });
+    }
+  }
 
 }

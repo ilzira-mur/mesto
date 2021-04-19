@@ -1,5 +1,5 @@
 import Card from '../components/Card.js';
-import { obj, FormValidator } from '../components/FormValidator.js';
+import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -32,6 +32,17 @@ const initialCards = [
     name: 'Укулхас',
     link: 'https://images.unsplash.com/photo-1575647063571-2f7094a9bc7e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80'
   }];
+
+// данные для валидации
+const obj = {
+  formSelectop: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button_type_save',
+  errorSpanClass: 'popup__span-error_active',
+  errorSpan: 'popup__span-error',
+  errorInputClass: 'popup__input_type_error',
+  inactiveButtonClass: 'popup__button_disabled',
+}
 
 
 const buttonEdit = document.querySelector('.button_type_edit');
@@ -107,12 +118,16 @@ buttonEdit.addEventListener('click', () => {
   const profileInfo = userInfo.getUserInfo();
   nameInput.value = profileInfo.name;
   jobInput.value = profileInfo.job;
+  formValidatorTypeEdit.removeInputErrors();
+  formValidatorTypeEdit.ableSubmitButton();
   editPopup.open();
 })
 
 // слушатель кнопки добавить новую карточку
 buttonAddCard.addEventListener('click', () => {
   formElementCard.reset();
+  formValidatorTypeNewCard.removeInputErrors();
+  formValidatorTypeNewCard.disableSubmitButton();
   addNewCardPopup.open();
 })
 
