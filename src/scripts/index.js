@@ -1,37 +1,13 @@
+import Api from '../components/Api.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
+import PopupDeleteCard from '../components/PopupDeleteCard.js';
 import '../pages/index.css';
 
-
-const initialCards = [
-  {
-    name: 'Анс',
-    link: 'https://images.unsplash.com/photo-1607508305025-7c74035cec0c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1661&q=80'
-  },
-  {
-    name: 'Канкун',
-    link: 'https://images.unsplash.com/photo-1560358564-933dc5864d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80'
-  },
-  {
-    name: 'Пхи Пхи',
-    link: 'https://images.unsplash.com/photo-1521109464564-2fa2faa95858?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    name: 'Гранд-Анс',
-    link: 'https://images.unsplash.com/photo-1467897705408-734f28cffec5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
-  },
-  {
-    name: 'Ла Диг',
-    link: 'https://images.unsplash.com/photo-1563464637439-5efdce3e66e2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80'
-  },
-  {
-    name: 'Укулхас',
-    link: 'https://images.unsplash.com/photo-1575647063571-2f7094a9bc7e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80'
-  }];
 
 // данные для валидации
 const obj = {
@@ -47,6 +23,7 @@ const obj = {
 
 const buttonEdit = document.querySelector('.button_type_edit');
 const editFormModalWindow = document.querySelector('.popup_type_edit');
+const deleteCardModalWindow = document.querySelector('.popup_type_delete-card');
 const formElementEdit = document.querySelector('.popup__form_type_edit');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_about');
@@ -57,6 +34,40 @@ const cardFormModalWindow = document.querySelector('.popup_type_add-card');
 const formElementCard = document.querySelector('.popup__form_type_new-card');
 const zoomedPictureModalWindow = document.querySelector('.popup_type_zoomed');
 const cardsList = document.querySelector('.cards');
+const buttonDelete = document.querySelectorAll('.card__button-delete');
+const avatarPenEdit = document.querySelector('.profile__avatar-container');
+const avatarEditModalWindow = document.querySelector('.popup_type_avatar-edit');
+const formElementAvatarEdit = document.querySelector('.popup__form_type_avatar-edit')
+const avatar = document.querySelector('.profile__avatar')
+
+// экземпляр класса Api
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-23',
+  headers: {
+    authorization: "8865dd26-fca5-4131-9c42-5dfb67b3f292",
+    "Content-Type": "application/json",
+  },
+});
+
+const myId = '93db2411cfebc66073c95258';
+
+
+// отрисовка карточек с сервера
+const getCards = api.getInitialCards();
+getCards.then((data) => {
+  const сards = new Section({
+    initialItems: data,
+    renderer: (item) => {
+      сards.addInitialItem(createCard(item));
+    },
+  },
+  cardsList,
+  api
+  );
+  сards.rendererItems();
+})
+.catch((err) => {console.log(err)
+});
 
 
 // экземпляр класса FormValidator для формы редактирования профиля
@@ -67,52 +78,115 @@ formValidatorTypeEdit.enableValidation();
 const formValidatorTypeNewCard = new FormValidator(obj, formElementCard);
 formValidatorTypeNewCard.enableValidation();
 
-// создание нового экземпляра карточки
-function createCard(item) {
-  const card = new Card(item, '.card-template_type_default', {
-    handleCardClick: () => {
-      popupWithImage.open(item.name, item.link);
-  }});
-  return card.createNewCard();
-};
+// экземпляр класса FormValidator для формы добавления нового Аватара
+const formValidatorTypeAvatarEdit = new FormValidator(obj, formElementAvatarEdit);
+formValidatorTypeAvatarEdit.enableValidation();
 
 // экземпляр класса PopupWithImage
 const popupWithImage = new PopupWithImage(zoomedPictureModalWindow);
 popupWithImage.setEventListeners();
 
+// экземпляр класса PopupDeleteCard
+const popupDelete = new PopupDeleteCard(deleteCardModalWindow);
+popupDelete.setEventListeners();
+
+// создание нового экземпляра карточки
+function createCard(item) {
+  const card = new Card( myId, item, '.card-template_type_default', {
+    handleCardClick: () => {
+      popupWithImage.open(item.name, item.link);
+  },
+   handleDeleteCard: (id) => {
+      popupDelete.open();
+      popupDelete.setHandleSubmit(function(){
+        api.deleteCard(item._id);
+        card.deleteCard(item._id);
+      });
+    },
+    handleAddlike: (id) => {
+      api.setLike(item._id)
+        .then((item) => {
+          card.showLikeCounter(item.likes);
+          card.addLike();
+        })
+    },
+    handleDeletelike: (id) => {
+      api.deleteLike(item._id)
+        .then((item) => {
+          card.showLikeCounter(item.likes);
+          card.addLike();
+        })
+    }
+});
+  return card.createNewCard();
+};
+
+
+
 // экземпляр класса PopupWithForm для попапа добавления карточки
 const addNewCardPopup = new PopupWithForm (cardFormModalWindow, {
-  formSubmitCallBack: (data) => {
-    const item = {
-      name: data.cardname,
-      link: data.cardlink,
-    };
-    сards.addItem(createCard(item));
-    formElementCard.reset();
+  formSubmitCallBack: () => {
+    const inputValue = addNewCardPopup.getInputValues();
+    const newItem = api.addNewCard(inputValue);
+    newItem.then((item) => {
+      createCard(item)
+    })
+  formElementCard.reset();
   formValidatorTypeNewCard.disableSubmitButton();
   addNewCardPopup.close();
   },
 });
 addNewCardPopup.setEventListeners();
 
+// экземпяр класса PopupWithForm для попапа редактирования Аватара
+const avatarEditPopup = new PopupWithForm (avatarEditModalWindow, {
+  formSubmitCallBack: () => {
+    const inputValue = avatarEditPopup.getInputValues();
+    const newAvatar = api.changeUserAvatar(inputValue);
+    newAvatar.then((data) => {
+        userInfo.setUserAvatar(data);
+      })
+  formElementAvatarEdit.reset();
+  formValidatorTypeAvatarEdit.disableSubmitButton();
+  avatarEditPopup.close();
+  } 
+  });
+avatarEditPopup.setEventListeners();
+
+
+
 
 // экземпяр класса для отображения информации о пользователе на странице
-const userInfo = new UserInfo({ nameInfo, jobInfo });
+const userInfo = new UserInfo({nameInfo, jobInfo, api, avatar});
+
+const updateUserInfo = api.getUserInfo()
+    .then((data) => {
+      userInfo.getUserInfo(data)
+      userInfo.setUserInfo(data)
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+      
 
 // экземпяр класса PopupWithForm для попапа редактирования профиля
 const editPopup = new PopupWithForm (editFormModalWindow, {
-  formSubmitCallBack: (data) => {
-    const item = {
-      name: data.profilename,
-      job: data.profileabout,
-    };
-    userInfo.setUserInfo(item);
-    editPopup.close();
+  formSubmitCallBack: () => {
+    const inputValue = editPopup.getInputValues();
+    const newProfile = api.setUserInfo(inputValue)
+    .then((data) => {
+        userInfo.setUserInfo(data)
+      })
+    .catch((err) => {
+      console.log(err);
+    })
+      editPopup.close();
+      
   }, 
 });
 editPopup.setEventListeners();
 
-
+ 
 // слушатель кнопки изменить профиль
 buttonEdit.addEventListener('click', () => {
   const profileInfo = userInfo.getUserInfo();
@@ -131,14 +205,7 @@ buttonAddCard.addEventListener('click', () => {
   addNewCardPopup.open();
 })
 
-// отрисовка карточек
-const сards = new Section({
-  initialItems: initialCards,
-  renderer: (item) => {
-    сards.addItem(createCard(item));
-  },
-},
-cardsList
-);
-
-сards.rendererItems()
+// слушатель кнопки обновить Аватар
+avatarPenEdit.addEventListener('click', () => {
+  avatarEditPopup.open();
+})

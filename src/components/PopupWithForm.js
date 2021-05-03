@@ -14,11 +14,12 @@ export default class PopupWithForm extends Popup {
   // сабмит формы
   _formSubmit(evt) {
     evt.preventDefault();
-    this._formSubmitCallBack(this._getInputValues(), this._submitButton);
+    this.handleLoading('Сохранение...');
+    this._formSubmitCallBack(this.getInputValues(), this._submitButton);
   }
 
   // сбор данных всех полей формы
-  _getInputValues() {
+  getInputValues() {
     const data = {};
     this._inputs.forEach((input) => {
       data[input.name] = input.value;

@@ -43,4 +43,9 @@ export default class Popup {
       });
     }
   
+  // уведомление о загрузке
+  handleLoading(message) {
+    this._buttonSubmit.textContent = message;
+  }
+
   }
