@@ -44,8 +44,8 @@ export default class Popup {
     }
   
   // уведомление о загрузке
-  handleLoading(message) {
-    this._buttonSubmit.textContent = message;
+  loadingMessage(text) {
+    this._buttonSubmit.textContent = text;
   }
 
   }

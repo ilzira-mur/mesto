@@ -13,14 +13,6 @@ export default class Section {
             this._renderer(item);
       });
     }
-
-    saveNewItem(element) {
-      this._api
-      .addNewCard({element})
-      .then((data) => this.addNewItem(data.cardname, data.cardlink
-      ))
-      .catch((err) => {console.log(err)});
-    };
   
     // загрузка новой карточки на страницу
     addNewItem(element) {

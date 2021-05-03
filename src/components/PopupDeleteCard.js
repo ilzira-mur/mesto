@@ -14,7 +14,7 @@ export default class PopupDeleteCard extends Popup {
   setEventListeners() {
     this._buttonDelete.addEventListener('click', (evt) => {
       evt.preventDefault();
-      this.handleLoading('Удаление...');
+      this.loadingMessage('Удаление...');
       this._handleSubmit();
       this.close();
     });
@@ -24,6 +24,6 @@ export default class PopupDeleteCard extends Popup {
   // открыть
   open() {
     super.open();
-    this.handleLoading('Да');
+    this.loadingMessage('Да');
   }
 }

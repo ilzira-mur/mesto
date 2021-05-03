@@ -66,8 +66,6 @@ export default class Card {
     this._element.querySelector('.card__button-like').classList.toggle('card__button-like_active');
   }
 
-
-
   // удаление карточки
   _handleDeleteCard() {
   this._element.querySelector('.card__button-delete').closest('.card').remove();
@@ -93,7 +91,12 @@ export default class Card {
   // показать лайки
   _showLike() {
     const like = this._element.querySelector('.card__button-like');
-    !like.classList.contains('card__button-like_active') ? this._handleAddlike() : this._handleDeletelike();
+    if (!like.classList.contains('card__button-like_active') === true) {
+      this._handleAddlike()
+    }
+    else {
+      this._handleDeletelike()
+    }
   }
 
 }

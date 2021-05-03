@@ -70,6 +70,7 @@ getCards.then((data) => {
 });
 
 
+
 // экземпляр класса FormValidator для формы редактирования профиля
 const formValidatorTypeEdit = new FormValidator(obj, formElementEdit);
 formValidatorTypeEdit.enableValidation();
@@ -92,6 +93,7 @@ popupDelete.setEventListeners();
 
 // создание нового экземпляра карточки
 function createCard(item) {
+
   const card = new Card( myId, item, '.card-template_type_default', {
     handleCardClick: () => {
       popupWithImage.open(item.name, item.link);

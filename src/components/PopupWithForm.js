@@ -14,7 +14,6 @@ export default class PopupWithForm extends Popup {
   // сабмит формы
   _formSubmit(evt) {
     evt.preventDefault();
-    this.handleLoading('Сохранение...');
     this._formSubmitCallBack(this.getInputValues(), this._submitButton);
   }
 
@@ -36,6 +35,7 @@ export default class PopupWithForm extends Popup {
   // перезапись родительского метода setEventListeners
   setEventListeners() {
     super.setEventListeners();
+    this.loadingMessage('Сохранение...');
     this._form.addEventListener('submit', this._formSubmit);
   }
 }
