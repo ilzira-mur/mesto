@@ -32,9 +32,12 @@ export default class Card {
     this._element.querySelector('.card__name').textContent = this._name;
     cardImage.src = this._link;
     cardImage.alt = this._name;
+    this._element.querySelector('.card__like-counter').textContent = this._likes.length
+    
+    if (this._data.likes.find((like) => like._id === this._myId)) {
+      this._element.querySelector('.card__button-like').classList.add('card__button-like_active');
+    }; 
 
-    
-    
     if (this._data.owner._id === this._myId) {
       this._element.querySelector('.card__button-delete').style.display = 'block';
     } else {
