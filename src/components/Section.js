@@ -1,15 +1,15 @@
 // класс размещения карточек на странице
 export default class Section {
-    constructor({ initialItems, renderer }, containerSelector, api) {
+    constructor({ initialItems, rendererItems }, containerSelector, api) {
       this._initialItems = initialItems;
-      this._renderer = renderer;
+      this._renderer = rendererItems;
       this._containerSelector = containerSelector;
       this._api = api;
     }
   
     // рендер карточек
-    rendererItems() {
-      this._initialItems.forEach((item) => {
+    rendererItems(items) {
+      items.forEach((item) => {
             this._renderer(item);
       });
     }

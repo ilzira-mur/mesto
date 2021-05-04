@@ -42,10 +42,5 @@ export default class Popup {
         this.close();
       });
     }
-  
-  // уведомление о загрузке
-  loadingMessage(text) {
-    this._buttonSubmit.textContent = text;
-  }
 
   }

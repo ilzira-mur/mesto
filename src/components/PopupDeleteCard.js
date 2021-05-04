@@ -14,16 +14,20 @@ export default class PopupDeleteCard extends Popup {
   setEventListeners() {
     this._buttonDelete.addEventListener('click', (evt) => {
       evt.preventDefault();
-      this.loadingMessage('Удаление...');
+      this._loadingMessageDelete('Удаление...');
       this._handleSubmit();
-      this.close();
     });
     super.setEventListeners();
+  }
+
+  // уведомление о удалении карточки
+  _loadingMessageDelete(text) {
+    this._buttonSubmit.textContent = text;
   }
 
   // открыть
   open() {
     super.open();
-    this.loadingMessage('Да');
+    this._loadingMessageDelete('Да');
   }
 }

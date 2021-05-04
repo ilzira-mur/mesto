@@ -1,10 +1,10 @@
 // класс для создания карточки
 export default class Card {
-  constructor(myId, data, cardSelector, {handleCardClick, handleDeleteCard, handleAddlike, handleDeletelike }) {
+  constructor(userId, data, cardSelector, {handleCardClick, handleDeleteCard, handleAddlike, handleDeletelike }) {
     this._name = data.name;
     this._link = data.link;
     this._data = data;
-    this._myId = myId;
+    this._userId = userId;
     this._id = data._id;
     this._likes = data.likes;
     this._owner = data.owner;
@@ -34,11 +34,11 @@ export default class Card {
     cardImage.alt = this._name;
     this._element.querySelector('.card__like-counter').textContent = this._likes.length
     
-    if (this._data.likes.find((like) => like._id === this._myId)) {
+    if (this._data.likes.find((like) => like._id === this._userId)) {
       this._element.querySelector('.card__button-like').classList.add('card__button-like_active');
     }; 
 
-    if (this._data.owner._id === this._myId) {
+    if (this._data.owner._id === this._userId) {
       this._element.querySelector('.card__button-delete').style.display = 'block';
     } else {
       this._element.querySelector('.card__button-delete').style.display = 'none';
@@ -54,7 +54,7 @@ export default class Card {
       this._showLike();
     });
     this._element.querySelector('.card__button-delete').addEventListener('click', () => {
-      this._handleDeleteCard(this._myId);
+      this._handleDeleteCard(this._userId);
     });
     this._element.querySelector('.card__picture').addEventListener('click', () => {
       this._handleCardClick(this._data.name, this._data.link);
