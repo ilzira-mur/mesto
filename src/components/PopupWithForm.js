@@ -15,7 +15,6 @@ export default class PopupWithForm extends Popup {
   _formSubmit(evt) {
     evt.preventDefault();
     this._formSubmitCallBack(this.getInputValues(), this._submitButton);
-    this.close();
   }
 
   // сбор данных всех полей формы

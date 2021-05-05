@@ -147,6 +147,7 @@ const addNewCardPopup = new PopupWithForm (cardFormModalWindow, {
     const newItem = api.addNewCard(inputValue);
     newItem.then((item) => {
       section.addNewItem(createCard(item));
+      addNewCardPopup.close();
     })
     .catch((err) => {
       console.log(err);
@@ -155,7 +156,6 @@ const addNewCardPopup = new PopupWithForm (cardFormModalWindow, {
       formElementCard.reset();
       formValidatorTypeNewCard.disableSubmitButton();
       loadingMessage(false, cardFormModalWindow);
-      addNewCardPopup.close();
     });
   },
 });
@@ -171,6 +171,7 @@ const avatarEditPopup = new PopupWithForm (avatarEditModalWindow, {
     const newAvatar = api.changeUserAvatar(inputValue);
     newAvatar.then((data) => {
         userInfo.setUserAvatar(data);
+        avatarEditPopup.close();
       })
       .catch((err) => {
         console.log(err);
@@ -179,7 +180,6 @@ const avatarEditPopup = new PopupWithForm (avatarEditModalWindow, {
         formElementAvatarEdit.reset();
         formValidatorTypeAvatarEdit.disableSubmitButton();
         loadingMessage(false, avatarEditModalWindow);
-        avatarEditPopup.close();
       });
   } 
   });
@@ -194,13 +194,13 @@ const editPopup = new PopupWithForm (editFormModalWindow, {
     const newProfile = api.setUserInfo(inputValue)
     .then((data) => {
         userInfo.setUserInfo(data)
+        editPopup.close();
       })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       loadingMessage(false, editFormModalWindow);
-      editPopup.close();
     })
   }, 
 });
